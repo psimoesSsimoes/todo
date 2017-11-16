@@ -77,6 +77,28 @@ func StoreTodo(db *sql.DB, project, todo string) error {
 	return nil
 }
 
+func ListTableNames(db *sql.DB) ([]string, error) {
+	sql_readall := "SELECT name FROM sqlite_master where type='table' EXCEPT SELECT name FROM sqlite_master where name='sqlite_sequence'"
+	rows, err := db.Query(sql_readall)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var result []string
+	for rows.Next() {
+		name := ""
+
+		err2 := rows.Scan(&name)
+		if err2 != nil {
+			return nil, err2
+		}
+
+		result = append(result, name)
+	}
+	return result, nil
+}
+
 func ReadTodos(db *sql.DB, project string) ([]TodoItem, error) {
 	sql_readall := "SELECT * FROM " + project + " order by id ASC"
 	rows, err := db.Query(sql_readall)

@@ -22,9 +22,18 @@ func make_cmd_list(filename string) *commander.Command {
 		if err != nil {
 			return err
 		}
-		if len(args) == 0 {
 
-			cmd.Usage()
+		black := color.New(color.FgBlack).Add(color.Underline).SprintFunc()
+
+		if len(args) == 0 {
+			projectNames, err := ListTableNames(db)
+			if err != nil {
+				return err
+			}
+			for _, v := range projectNames {
+				fmt.Printf("%s\n", black(v))
+
+			}
 
 			return nil
 
@@ -37,7 +46,7 @@ func make_cmd_list(filename string) *commander.Command {
 			return err
 
 		}
-		black := color.New(color.FgBlack).Add(color.Underline).SprintFunc()
+
 		for _, v := range todos {
 
 			switch v.Done {
