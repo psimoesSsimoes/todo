@@ -52,6 +52,16 @@ $ todo list projectname
 ☑ 002: Fix bug in vim
 ☑ 003: Bake cake
 ```
+### Status todo
+```
+$ todo status projectname 3
+
+$ todo list projectname
+001: Task Send patch to golang-dev started 1m19s ago
+002:Task Fix bug in vim completed!
+003:Task Bake cake completed!
+
+```
 
 ### Undone todo
 ```
