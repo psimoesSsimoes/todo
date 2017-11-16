@@ -90,7 +90,6 @@ $ go get github.com/psimoesSsimoes/todo
 
 ## License
 
-Uninova
 
 ## Author
 
